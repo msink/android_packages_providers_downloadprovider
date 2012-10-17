@@ -134,7 +134,7 @@ public class Helpers {
         if (path.startsWith(cache.getPath())) {
             return cache;
         }
-        File external = Environment.getExternalStorageDirectory();
+        File external = Environment.getFlashStorageDirectory();
         if (path.startsWith(external.getPath())) {
             return external;
         }
@@ -205,8 +205,6 @@ public class Helpers {
                     if (Constants.LOGV) {
                         Log.v(Constants.TAG, "no handler found for type " + mimeType);
                     }
-                    throw new GenerateSaveFileError(Downloads.Impl.STATUS_NOT_ACCEPTABLE,
-                            "no handler found for this download type");
                 }
             }
         }
@@ -233,7 +231,7 @@ public class Helpers {
                     "external media not mounted");
         }
 
-        File root = Environment.getExternalStorageDirectory();
+        File root = Environment.getFlashStorageDirectory();
         if (getAvailableBytes(root) < contentLength) {
             // Insufficient space.
             Log.d(Constants.TAG, "download aborted - not enough free space");
@@ -537,7 +535,7 @@ public class Helpers {
     public static boolean isFilenameValid(String filename) {
         filename = filename.replaceFirst("/+", "/"); // normalize leading slashes
         return filename.startsWith(Environment.getDownloadCacheDirectory().toString())
-                || filename.startsWith(Environment.getExternalStorageDirectory().toString());
+                || filename.startsWith(Environment.getFlashStorageDirectory().toString());
     }
 
     /**
