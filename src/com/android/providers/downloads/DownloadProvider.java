@@ -594,6 +594,9 @@ public final class DownloadProvider extends ContentProvider {
             throw new IllegalArgumentException("Invalid file URI: " + uri);
         }
         String externalPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        if (!Helpers.isExternalMediaMounted()) {
+            externalPath = Environment.getFlashStorageDirectory().getAbsolutePath();
+        }
         if (!path.startsWith(externalPath)) {
             throw new SecurityException("Destination must be on external storage: " + uri);
         }

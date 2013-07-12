@@ -108,10 +108,6 @@ public class Helpers {
 
     private static String getPathForFileUri(String hint, long contentLength)
             throws GenerateSaveFileError {
-        if (!isExternalMediaMounted()) {
-            throw new GenerateSaveFileError(Downloads.Impl.STATUS_DEVICE_NOT_FOUND_ERROR,
-                    "external media not mounted");
-        }
         String path = Uri.parse(hint).getPath();
         if (new File(path).exists()) {
             Log.d(Constants.TAG, "File already exists: " + path);
@@ -226,11 +222,6 @@ public class Helpers {
     }
 
     private static File getExternalDestination(long contentLength) throws GenerateSaveFileError {
-        if (!isExternalMediaMounted()) {
-            throw new GenerateSaveFileError(Downloads.Impl.STATUS_DEVICE_NOT_FOUND_ERROR,
-                    "external media not mounted");
-        }
-
         File root = Environment.getFlashStorageDirectory();
         if (getAvailableBytes(root) < contentLength) {
             // Insufficient space.
