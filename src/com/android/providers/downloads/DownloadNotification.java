@@ -253,7 +253,7 @@ class DownloadNotification {
             intent.setData(contentUri);
             n.deleteIntent = PendingIntent.getBroadcast(mContext, 0, intent, 0);
 
-            mSystemFacade.postNotification(download.mId, n);
+            mSystemFacade.cancelNotification(download.mId);
         }
     }
 
