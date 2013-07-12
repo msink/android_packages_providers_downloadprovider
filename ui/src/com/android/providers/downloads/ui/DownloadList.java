@@ -579,7 +579,8 @@ public class DownloadList extends Activity
             String localUri = mDateSortedCursor.getString(mLocalUriColumnId);
             if (isComplete && localUri != null) {
                 String path = Uri.parse(localUri).getPath();
-                if (path.startsWith(Environment.getExternalStorageDirectory().getPath())) {
+                if (path.startsWith(Environment.getExternalStorageDirectory().getPath()) ||
+                       path.startsWith(Environment.getFlashStorageDirectory().getPath())) {
                     String mediaProviderUri = mDateSortedCursor.getString(mMediaProviderUriId);
                     if (TextUtils.isEmpty(mediaProviderUri)) {
                         // downloads database doesn't have the mediaprovider_uri. It means
